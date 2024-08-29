@@ -77,9 +77,6 @@ download_release() {
 	#  Extract contents of gz file into the download directory
 	gunzip --decompress "$filename" || fail "Could not extract $filename"
 	popd >/dev/null
-
-	# Remove the gz file since we don't need to keep it
-	rm "$filename"
 }
 
 install_version() {
