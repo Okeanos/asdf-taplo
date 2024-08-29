@@ -2,7 +2,6 @@
 
 set -euo pipefail
 
-# TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for taplo.
 GH_REPO="https://github.com/tamasfe/taplo"
 TOOL_NAME="taplo"
 TOOL_TEST="taplo --version"
@@ -31,21 +30,56 @@ list_github_tags() {
 }
 
 list_all_versions() {
-	# TODO: Adapt this. By default we simply list the tag names from GitHub releases.
 	# Change this function if taplo has other means of determining installable versions.
-	list_github_tags
+	list_github_tags | grep 'release-taplo-cli-' | cut -d'-' -f4
+}
+
+get_platform() {
+	local -r kernel="$(uname -s)"
+	if [[ ${OSTYPE} == "msys" || ${kernel} == "CYGWIN"* || ${kernel} == "MINGW"* ]]; then
+		echo windows
+	else
+		uname | tr '[:upper:]' '[:lower:]'
+	fi
+}
+
+get_arch() {
+	local -r machine="$(uname -m)"
+
+	if [[ ${machine} == "arm64" ]] || [[ ${machine} == "aarch64" ]]; then
+		echo "aarch64"
+	elif [[ ${machine} == *"arm"* ]] || [[ ${machine} == *"aarch"* ]]; then
+		echo "aarch"
+	elif [[ ${machine} == *"386"* ]]; then
+		echo "x86"
+	else
+		echo "x86_64"
+	fi
+}
+
+get_release_file() {
+	echo "${ASDF_DOWNLOAD_PATH}/${TOOL_NAME}-${ASDF_INSTALL_VERSION}.gz"
 }
 
 download_release() {
 	local version filename url
 	version="$1"
-	filename="$2"
+	local -r filename="$(get_release_file)"
+	local -r platform="$(get_platform)"
+	local -r arch="$(get_arch)"
 
-	# TODO: Adapt the release URL convention for taplo
-	url="$GH_REPO/archive/v${version}.tar.gz"
+	url="$GH_REPO/releases/download/${version}/${TOOL_NAME}-full-${platform}-${arch}.gz"
 
 	echo "* Downloading $TOOL_NAME release $version..."
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
+
+	pushd "$ASDF_DOWNLOAD_PATH}" >/dev/null
+	#  Extract contents of gz file into the download directory
+	gunzip --decrompress "$filename" || fail "Could not extract $filename"
+	popd >/dev/null
+
+	# Remove the gz file since we don't need to keep it
+	rm "$filename"
 }
 
 install_version() {
@@ -61,7 +95,6 @@ install_version() {
 		mkdir -p "$install_path"
 		cp -r "$ASDF_DOWNLOAD_PATH"/* "$install_path"
 
-		# TODO: Assert taplo executable exists.
 		local tool_cmd
 		tool_cmd="$(echo "$TOOL_TEST" | cut -d' ' -f1)"
 		test -x "$install_path/$tool_cmd" || fail "Expected $install_path/$tool_cmd to be executable."
