@@ -73,7 +73,7 @@ download_release() {
 	echo "* Downloading $TOOL_NAME release $version..."
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
 
-	pushd "$ASDF_DOWNLOAD_PATH}" >/dev/null
+	pushd "$ASDF_DOWNLOAD_PATH" >/dev/null
 	#  Extract contents of gz file into the download directory
 	gunzip --decrompress "$filename" || fail "Could not extract $filename"
 	popd >/dev/null
