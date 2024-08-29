@@ -77,6 +77,8 @@ download_release() {
 	#  Extract contents of gz file into the download directory
 	gunzip --decompress "$filename" || fail "Could not extract $filename"
 	chmod +x "$TOOL_NAME-${ASDF_INSTALL_VERSION}" # for some reason the binary isn't executable by default
+	 # rename the binary to have the expected name
+	mv "$TOOL_NAME-${ASDF_INSTALL_VERSION}" "$TOOL_NAME"
 	popd >/dev/null
 }
 
