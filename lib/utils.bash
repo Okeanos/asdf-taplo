@@ -76,6 +76,7 @@ download_release() {
 	pushd "$ASDF_DOWNLOAD_PATH" >/dev/null
 	#  Extract contents of gz file into the download directory
 	gunzip --decompress "$filename" || fail "Could not extract $filename"
+	chmod +x taplo # for some reason the binary isn't executable by default
 	popd >/dev/null
 }
 
