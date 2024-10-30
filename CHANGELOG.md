@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/Okeanos/asdf-taplo/compare/v1.0.1...v1.1.0) (2024-10-30)
+
+
+### Features
+
+* synchronize with Okeanos/template-repository ([9566009](https://github.com/Okeanos/asdf-taplo/commit/9566009ecea602b7ebc2f9e40eeff99574c6642b))
+
 ## [1.0.1](https://github.com/Okeanos/asdf-taplo/compare/v1.0.0...v1.0.1) (2024-09-17)
 
 
