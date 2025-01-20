@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/Okeanos/asdf-taplo/compare/v1.1.0...v1.2.0) (2025-01-20)
+
+
+### Features
+
+* add script to automate sha256sum updates for mise defined tools ([11dbeed](https://github.com/Okeanos/asdf-taplo/commit/11dbeed0fabc308dbc91426faeac1338bdaf356c))
+
 ## [1.1.0](https://github.com/Okeanos/asdf-taplo/compare/v1.0.1...v1.1.0) (2024-10-30)
 
 
