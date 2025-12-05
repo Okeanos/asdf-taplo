@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.2](https://github.com/Okeanos/asdf-taplo/compare/v1.2.1...v1.2.2) (2025-12-05)
+
+
+### Bug Fixes
+
+* use correct URL for latest release download ([8e3edb4](https://github.com/Okeanos/asdf-taplo/commit/8e3edb4ab53a1c0baf765b014e82d708013d8cd8))
+
 ## [1.2.1](https://github.com/Okeanos/asdf-taplo/compare/v1.2.0...v1.2.1) (2025-06-15)
 
 
