@@ -69,6 +69,9 @@ download_release() {
 	local -r arch="$(get_arch)"
 
 	url="$GH_REPO/releases/download/${version}/${TOOL_NAME}-${platform}-${arch}.gz"
+	if [[ ${version} == "latest" ]]; then
+		url="$GH_REPO/releases/${version}/download/${TOOL_NAME}-${platform}-${arch}.gz"
+	fi
 
 	echo "* Downloading $TOOL_NAME release $version..."
 	curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
