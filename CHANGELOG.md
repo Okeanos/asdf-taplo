@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/Okeanos/asdf-taplo/compare/v1.2.2...v1.3.0) (2026-05-15)
+
+
+### Features
+
+* re-align with template-repository ([674fdf3](https://github.com/Okeanos/asdf-taplo/commit/674fdf318dcc1f108d7b7908ea908d3dab177c89))
+
 ## [1.2.2](https://github.com/Okeanos/asdf-taplo/compare/v1.2.1...v1.2.2) (2025-12-05)
 
 
